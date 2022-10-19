@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+body,
+div, span, p,
+input, button,
+table, thead, tfoot, tbody, tr, th, td 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+body {
+    font-size: 14px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.4;
+}

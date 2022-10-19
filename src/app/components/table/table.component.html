@@ -1,0 +1,33 @@
+<div class="table-container">
+    <div class="header"></div>
+    <div class="body">
+
+        <div class="row" *ngIf="headers.length > 0" >
+            <div class="cell" *ngFor="let header of headers" [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': 'center'  }">
+                <b>{{header}}</b>
+            </div>
+        </div>
+        <div class="row" *ngFor="let item of data">
+            <div class="cell" *ngFor="let attribute of item | keyValue" [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': isNum(attribute.value) ? 'right' : 'left' }">
+                {{attribute.value}}
+            </div>
+
+            <div class="row-tools-container">
+                <div class="row-tools">
+                    <div class="tool-item">
+                        <img class="icon" src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/view-512.png" />
+                    </div>
+                    <div class="tool-item">
+                        <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer"></div>
+</div>
+
+
+
+
