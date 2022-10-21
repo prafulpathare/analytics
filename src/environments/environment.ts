@@ -14,3 +14,9 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+export const link = {
+  icon : {
+    delete: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png'
+  }
+}

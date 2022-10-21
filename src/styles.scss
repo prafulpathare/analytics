@@ -15,3 +15,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.4;
 }
+
+button, .btn {
+    background-color: #ccc;
+    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 1px #888;
+    text-transform: capitalize;
+    cursor: pointer;
+}

@@ -1,24 +1,44 @@
 <div class="table-container">
-    <div class="header"></div>
-    <div class="body">
+    <div class="header">
+        <div style="flex-grow: 1;"></div>
+        <div class="operations-button-container">
 
-        <div class="row" *ngIf="headers.length > 0" >
-            <div class="cell" *ngFor="let header of headers" [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': 'center'  }">
+            <div class="" *ngIf="selectedItems.length > 0" (click)="deleteSelectedItems()">
+                <img class="icon "
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="row" *ngIf="headers.length > 0">
+            <div class="cell" *ngFor="let header of headers"
+                [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': 'center'  }">
                 <b>{{header}}</b>
             </div>
         </div>
         <div class="row" *ngFor="let item of data">
-            <div class="cell" *ngFor="let attribute of item | keyValue" [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': isNum(attribute.value) ? 'right' : 'left' }">
-                {{attribute.value}}
+            <div class="cell select-col">
+                <input class="select-check" type="checkbox" (change)="onSelectItem(item)" />
+            </div>
+            <div class="cell" *ngFor="let attribute of item | keyValue"
+                [ngStyle]="{ 'flex': typeOf(attribute.value) === 'number' ? 1 : 2,  'text-align': isNum(attribute.value) ? 'right' : 'left' }">
+                <span *ngIf="isLink(attribute.value)">
+                    <a target="_blank" [href]="attribute.value"> {{ attribute.value }}</a>
+                </span>
+                <span *ngIf="!isLink(attribute.value)">
+                    {{attribute.value}}
+                </span>
             </div>
 
             <div class="row-tools-container">
                 <div class="row-tools">
-                    <div class="tool-item">
+                    <div class="tool-item" (click)="onItemView(item)">
                         <img class="icon" src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/view-512.png" />
                     </div>
-                    <div class="tool-item">
-                        <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
+                    <div class="tool-item" (click)="deleteItem(item)">
+                        <img class="icon"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
                     </div>
                 </div>
             </div>
@@ -28,6 +48,47 @@
     <div class="footer"></div>
 </div>
 
+<div *ngIf="viewItem && viewItem.length > 0" class="item-view-container">
+    <div class="top-bar">
+        <div class="title"> {{ viewItem[1].value }}</div>
+        <div class="close-btn" (click)="viewItem = []">
+            <img class="close-icon icon"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQycp6K1aJEx_SYs5XSiyRZ1kZZD7In_vVVAUnXZow&s"
+                alt="" srcset="">
+        </div>
+    </div>
+    <div class="break-line"></div>
+    <div class="body">
+        <div class="row" *ngFor="let keyVal of viewItem">
+            <div class="col">
+                {{ keyVal.key }}
+            </div>
+            <div *ngIf="typeOf(keyVal.value) === 'object'" class="col">
+                <div class="row" *ngFor="let kv of keyVal.value">
+                    <div class="col">
+                        {{ kv.key }}
+                    </div>
+                    <div class="col">
+                        <span *ngIf="isLink(kv.value)">
+                            <a target="_blank" [href]="kv.value"> {{ kv.value }}</a>
+                        </span>
+                        <span *ngIf="!isLink(kv.value)">
+                            {{kv.value}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="typeOf(keyVal.value) !== 'object'" class="col">
+                <span *ngIf="isLink(keyVal.value)">
+                    <a target="_blank" [href]="keyVal.value"> {{ keyVal.value }}</a>
+                </span>
+                <span *ngIf="!isLink(keyVal.value)">
+                    {{keyVal.value}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
 
-
-
+    </div>
+</div>
