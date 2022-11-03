@@ -12,6 +12,10 @@ export class TableComponent implements OnInit {
   selectedItems: any[] = [];
   viewItem: any[] = [];
 
+  cover: any = {
+    enabled: false
+  }
+
   constructor() { }
 
   ngOnInit(): void {
@@ -28,10 +32,15 @@ export class TableComponent implements OnInit {
   }
 
   onItemView(item: any) : void {
+    this.cover.enabled = true;
+
     let keys = Object.keys(item);
-    
     this.viewItem = this.getKeyValArrayFromObject(item);
     console.log(this.viewItem);
+  }
+  unsetViewItem() {
+    this.viewItem = [];
+    this.cover.enabled = false;
   }
 
   getKeyValArrayFromObject(object: any): any {
@@ -52,7 +61,8 @@ export class TableComponent implements OnInit {
   }
 
   typeOf(value: any) {
-    return typeof value;
+    if(this.headers.indexOf(value) < 0) {return typeof value;}
+    return typeof this.data[0][value];
   }
 
   isLink(val: string) {
@@ -60,6 +70,10 @@ export class TableComponent implements OnInit {
   }
 
   onSelectItem(selectableItem: any) {
+    if(selectableItem === undefined) {
+      this.selectedItems = this.data;
+      return;
+    }
     let selectedItemIndex = this.selectedItems.indexOf(selectableItem);
     if(selectedItemIndex < 0) {
       this.selectedItems.push(selectableItem);

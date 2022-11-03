@@ -3,17 +3,19 @@
         <div style="flex-grow: 1;"></div>
         <div class="operations-button-container">
 
-            <div class="" *ngIf="selectedItems.length > 0" (click)="deleteSelectedItems()">
-                <img class="icon "
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
+            <div class="btn" *ngIf="selectedItems.length > 0" (click)="deleteSelectedItems()">
+                Delete
             </div>
         </div>
     </div>
 
     <div class="body">
         <div class="row" *ngIf="headers.length > 0">
+            <div class="cell select-col">
+                <input class="select-check" type="checkbox" (change)="onSelectItem(undefined)" />
+            </div>
             <div class="cell" *ngFor="let header of headers"
-                [ngStyle]="{'width': 100 / headers.length + '%', 'text-align': 'center'  }">
+                [ngStyle]="{'flex': typeOf(header) === 'number' ? 1 : 3, 'text-align': 'center'  }">
                 <b>{{header}}</b>
             </div>
         </div>
@@ -22,7 +24,7 @@
                 <input class="select-check" type="checkbox" (change)="onSelectItem(item)" />
             </div>
             <div class="cell" *ngFor="let attribute of item | keyValue"
-                [ngStyle]="{ 'flex': typeOf(attribute.value) === 'number' ? 1 : 2,  'text-align': isNum(attribute.value) ? 'right' : 'left' }">
+                [ngStyle]="{ 'flex': typeOf(attribute.value) === 'number' ? 1 : 3,  'text-align': isNum(attribute.value) ? 'right' : 'left' }">
                 <span *ngIf="isLink(attribute.value)">
                     <a target="_blank" [href]="attribute.value"> {{ attribute.value }}</a>
                 </span>
@@ -34,11 +36,11 @@
             <div class="row-tools-container">
                 <div class="row-tools">
                     <div class="tool-item" (click)="onItemView(item)">
-                        <img class="icon" src="https://cdn2.iconfinder.com/data/icons/picol-vector/32/view-512.png" />
+                        <img class="icon" src="assets/icons/view.png" />
                     </div>
                     <div class="tool-item" (click)="deleteItem(item)">
                         <img class="icon"
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Delete-button.svg/1200px-Delete-button.svg.png" />
+                            src="assets/icons/delete.png" />
                     </div>
                 </div>
             </div>
@@ -51,9 +53,9 @@
 <div *ngIf="viewItem && viewItem.length > 0" class="item-view-container">
     <div class="top-bar">
         <div class="title"> {{ viewItem[1].value }}</div>
-        <div class="close-btn" (click)="viewItem = []">
+        <div class="close-btn" (click)="unsetViewItem()">
             <img class="close-icon icon"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQycp6K1aJEx_SYs5XSiyRZ1kZZD7In_vVVAUnXZow&s"
+                src="assets/icons/cancel.png"
                 alt="" srcset="">
         </div>
     </div>
@@ -92,3 +94,5 @@
 
     </div>
 </div>
+
+<div *ngIf="cover.enabled" class="cover"></div>

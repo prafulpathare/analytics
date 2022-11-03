@@ -17,8 +17,7 @@
 
         .row {
             display: flex;
-            position: relative;         
-            border-bottom: 1px solid #ececec;
+            position: relative;
 
             &:hover {
                 
@@ -26,8 +25,8 @@
                     display: block;
                 }
             }
-            &:first-child {
-                background-color: #ffffff;
+            &:nth-child(2n) {
+                background-color: #f4f4f4;                
             }
 
             .cell {
@@ -35,6 +34,10 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+
+                &:nth-child(1) {
+                    text-align: right;
+                }
 
                 .select-col {
                     text-align: right;
@@ -56,6 +59,7 @@
                 .row-tools {
                     float: right;
                     display: flex;
+                    transition: all 5s ease;
 
                     .tool-item {
                         margin: 0 10px;
@@ -81,17 +85,20 @@
 
 
 .item-view-container {
+    z-index: 1001;
     position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     
-    box-shadow: 2px 2px 20px 3px rgb(51, 48, 48);
-    min-width: 420px;
+    min-width: 360px;
     width: 50%;
     position: fixed;
-    top: 20vh;
     background-color: #ffffff;
-    border-radius: 5px;
-    padding-top: 15px ;
-    left: calc(50% - 420px);
+    border-radius: 15px 15px 0 0;
+    padding: 15px 0;
+    bottom: 2vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     
     .top-bar {
         padding: 0 15px;
@@ -120,7 +127,6 @@
     }
     
     .body {
-        overflow-x: scroll;
 
         .row {
             display: flex;
@@ -151,4 +157,14 @@
     }
     .footer {}
 
+}
+
+.cover {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255,255, 0.51);
 }

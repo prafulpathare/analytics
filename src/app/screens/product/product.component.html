@@ -1,7 +1,14 @@
 
 
-<app-search [placeholder]="'Product search...'"></app-search>
+<br />
+<div style="float: right;">
+    <app-search [placeholder]="'Product search...'"></app-search>
+</div>
 
+
+<div style="clear: both;"></div>
+
+<br />
 <app-table
-    [headers]="['Product name', 'Price']"
+    [headers]="['Product name', 'Price', 'Description', 'Category', 'Image', 'rating']"
     [data]="products"></app-table>
