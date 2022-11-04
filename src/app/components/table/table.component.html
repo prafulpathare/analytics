@@ -71,50 +71,6 @@
   <div class="footer"></div>
 </div>
 
-<div *ngIf="viewItem && viewItem.length > 0" class="item-view-container">
-  <div class="top-bar">
-    <div class="title">{{ viewItem[1].value }}</div>
-    <div class="close-btn" (click)="unsetViewItem()">
-      <img
-        class="close-icon icon"
-        src="assets/icons/cancel.png"
-        alt=""
-        srcset=""
-      />
-    </div>
-  </div>
-  <div class="break-line"></div>
-  <div class="body">
-    <div class="row" *ngFor="let keyVal of viewItem">
-      <div class="col">
-        {{ keyVal.key }}
-      </div>
-      <div *ngIf="typeOf(keyVal.value) === 'object'" class="col">
-        <div class="row" *ngFor="let kv of keyVal.value">
-          <div class="col">
-            {{ kv.key }}
-          </div>
-          <div class="col">
-            <span *ngIf="isLink(kv.value)">
-              <a target="_blank" [href]="kv.value"> {{ kv.value }}</a>
-            </span>
-            <span *ngIf="!isLink(kv.value)">
-              {{ kv.value }}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="typeOf(keyVal.value) !== 'object'" class="col">
-        <span *ngIf="isLink(keyVal.value)">
-          <a target="_blank" [href]="keyVal.value"> {{ keyVal.value }}</a>
-        </span>
-        <span *ngIf="!isLink(keyVal.value)">
-          {{ keyVal.value }}
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="footer"></div>
-</div>
 
-<div *ngIf="cover.enabled" class="cover"></div>
+
+<app-item-viewer *ngIf="viewItem.length > 0" [item]="viewItem" ></app-item-viewer>

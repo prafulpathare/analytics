@@ -12,10 +12,6 @@ export class TableComponent implements OnInit {
   selectedItems: any[] = [];
   viewItem: any[] = [];
 
-  cover: any = {
-    enabled: false
-  }
-
   constructor() { }
 
   ngOnInit(): void {
@@ -32,7 +28,6 @@ export class TableComponent implements OnInit {
   }
 
   onItemView(item: any) : void {
-    this.cover.enabled = true;
 
     let keys = Object.keys(item);
     this.viewItem = this.getKeyValArrayFromObject(item);
@@ -40,7 +35,6 @@ export class TableComponent implements OnInit {
   }
   unsetViewItem() {
     this.viewItem = [];
-    this.cover.enabled = false;
   }
 
   getKeyValArrayFromObject(object: any): any {
